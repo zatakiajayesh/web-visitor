@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Web Visitor Tracker</title>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <h1>Web Visitor Tracker</h1>
+            </div>
+            <div class="navbar-menu">
+                <a href="#" id="userEmail" class="user-email"></a>
+                <button id="logoutBtn" class="btn-logout">Logout</button>
+            </div>
+        </nav>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="#dashboard" class="menu-item active" data-section="dashboard">Dashboard</a></li>
+                <li><a href="#visitors" class="menu-item" data-section="visitors">Visitors</a></li>
+                <li><a href="#analytics" class="menu-item" data-section="analytics">Analytics</a></li>
+                <li><a href="#pages" class="menu-item" data-section="pages">Top Pages</a></li>
+                <li><a href="#devices" class="menu-item" data-section="devices">Devices</a></li>
+                <li><a href="#browsers" class="menu-item" data-section="browsers">Browsers</a></li>
+                <li><a href="#report" class="menu-item" data-section="report">Report</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <h2>Dashboard Overview</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Visitors</h3>
+                        <p class="stat-value" id="totalVisitors">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Unique Visitors</h3>
+                        <p class="stat-value" id="uniqueVisitors">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Page Views</h3>
+                        <p class="stat-value" id="pageViews">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Avg Duration</h3>
+                        <p class="stat-value" id="avgDuration">0s</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Active Now</h3>
+                        <p class="stat-value" id="activeNow">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Bounce Rate</h3>
+                        <p class="stat-value" id="bounceRate">0%</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Hourly Traffic</h3>
+                    <canvas id="hourlyChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Visitors Section -->
+            <section id="visitors" class="section">
+                <h2>Recent Visitors</h2>
+                
+                <div class="table-controls">
+                    <input type="text" id="visitorSearch" placeholder="Search visitors...">
+                    <button id="refreshVisitors" class="btn-primary">Refresh</button>
+                </div>
+
+                <table class="visitors-table">
+                    <thead>
+                        <tr>
+                            <th>IP Address</th>
+                            <th>Browser</th>
+                            <th>Device</th>
+                            <th>Visits</th>
+                            <th>Last Visit</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="visitorsTable">
+                        <tr><td colspan="6" class="text-center">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="section">
+                <h2>Analytics Report</h2>
+                
+                <div class="filters">
+                    <input type="date" id="startDate">
+                    <input type="date" id="endDate">
+                    <button id="filterAnalytics" class="btn-primary">Filter</button>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Summary</h3>
+                        <div id="analyticsSummary"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Top Pages Section -->
+            <section id="pages" class="section">
+                <h2>Top Pages</h2>
+                
+                <table class="pages-table">
+                    <thead>
+                        <tr>
+                            <th>Page URL</th>
+                            <th>Visits</th>
+                            <th>Unique Visitors</th>
+                            <th>Avg Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pagesTable">
+                        <tr><td colspan="4" class="text-center">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Devices Section -->
+            <section id="devices" class="section">
+                <h2>Device Statistics</h2>
+                
+                <div class="chart-container">
+                    <canvas id="devicesChart"></canvas>
+                </div>
+
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Device Type</th>
+                            <th>Visitors</th>
+                            <th>Page Views</th>
+                            <th>Avg Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devicesTable">
+                        <tr><td colspan="4" class="text-center">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Browsers Section -->
+            <section id="browsers" class="section">
+                <h2>Browser Statistics</h2>
+                
+                <div class="chart-container">
+                    <canvas id="browsersChart"></canvas>
+                </div>
+
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Browser</th>
+                            <th>Visitors</th>
+                            <th>Page Views</th>
+                        </tr>
+                    </thead>
+                    <tbody id="browsersTable">
+                        <tr><td colspan="3" class="text-center">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Report Section -->
+            <section id="report" class="section">
+                <h2>Detailed Report</h2>
+                
+                <div class="report-controls">
+                    <input type="date" id="reportStartDate">
+                    <input type="date" id="reportEndDate">
+                    <button id="generateReport" class="btn-primary">Generate Report</button>
+                    <button id="downloadReport" class="btn-secondary">Download PDF</button>
+                </div>
+
+                <div id="reportContent" class="report-content"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>
