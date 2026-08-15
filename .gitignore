@@ -1,0 +1,30 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Composer
+vendor/
+composer.lock
+
+# Logs
+logs/
+*.log
+
+# Cache
+cache/
+.cache/
+
+# Session files
+sessions/
+
+# Upload files
+uploads/
